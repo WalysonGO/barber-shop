@@ -21,7 +21,7 @@ Clone este repositório
 $ git clone https://github.com/ibonkonesa/barber-shop.git
 ```
 
-You must create a new Firebase project. Cloud Firestore location must be set to us-central (default). If you choose other location, you must update src/store/user/location variable. Go to database section and create a new cloud firestore database. 
+Você deve criar um novo projeto Firebase. O local do Cloud Firestore deve ser definido como us-central (padrão). Se você escolher outro local, deverá atualizar a variável src / store / user / location. Vá para a seção de banco de dados e crie um novo banco de dados Cloud Firestore.
 
 
 Este repo tem duas pernas: funções de nuvem (atua como um servidor de back-end, fornecendo autenticação e acionamento quando as reservas são escritas) e um Vue.JS SPA que permite aos usuários fazer e verificar as reservas.
