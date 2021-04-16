@@ -1,23 +1,22 @@
 # Barber Shop
 
-Demo is available [here](https://barber-shop-53333.web.app/) 
+A demonstração está disponível [aqui] (https://barber-shop-53333.web.app/)
 
-Admin credentials: 
-- username:demo@demo.com 
+Credenciais de administrador:
+- username: demo@demo.com
 - password: demo2020
 
-Reservations system made with Vue + Firebase ecosystem (cloud functions, auth, firestore, hosting). This example is inspired in a barber shop requirements, but is applicable in a lot of scenarios. 
+Sistema de reservas feito com ecossistema Vue + Firebase (funções de nuvem, auth, firestore, hosting). Este exemplo é inspirado nos requisitos de uma barbearia, mas é aplicável em muitos cenários.
 
-User can make a reservation getting a code. This code could be used to cancel the reservation.
+O usuário pode fazer uma reserva obtendo um código. Este código pode ser usado para cancelar a reserva.
 
-You can deploy a reservation system without a server, but keep in mind this is just a playground.
+Você pode implantar um sistema de reserva sem um servidor, mas tenha em mente que isso é apenas um playground.
 
-Comments and contributions will be appreciated. I'm doing it just for fun.
+Comentários e contribuições serão apreciados. Estou fazendo isso apenas para me divertir.
 
-## Project setup
+## Configuração do projeto
 
-Clone this repository
-
+Clone este repositório
 ```sh
 $ git clone https://github.com/ibonkonesa/barber-shop.git
 ```
@@ -25,52 +24,52 @@ $ git clone https://github.com/ibonkonesa/barber-shop.git
 You must create a new Firebase project. Cloud Firestore location must be set to us-central (default). If you choose other location, you must update src/store/user/location variable. Go to database section and create a new cloud firestore database. 
 
 
-This repo have two legs: Cloud functions (act as a backend server, providing authentication and triggering when bookings are written) and a Vue.JS SPA that allow users to make and check reservations.
+Este repo tem duas pernas: funções de nuvem (atua como um servidor de back-end, fornecendo autenticação e acionamento quando as reservas são escritas) e um Vue.JS SPA que permite aos usuários fazer e verificar as reservas.
 
-Cloud functions code is located at cloud-functions folder. In the root of this folder there is a file you have to edit. 
+O código de funções da nuvem está localizado na pasta de funções da nuvem. Na raiz desta pasta, há um arquivo que você deve editar.
 
-Rename .firebaserc.example to .firebaserc and update projects.default value with your Firebase Project id. You can see it on Project Configuration in the Firebase console.
+Renomeie .firebaserc.example para .firebaserc e atualize o valor de projects.default com seu ID de projeto do Firebase. Você pode vê-lo na configuração do projeto no console do Firebase.
 
-Public folder is a symbolic link to the dist folder. This folder ("public") will be published when you deploy your Firebase project (this feature is called "Hosting". When you create a Firebase project you get some hosting space. You can link your domain with this hosting. Later I explain it better.).
+A pasta pública é um link simbólico para a pasta dist. Esta pasta ("pública") será publicada quando você implantar seu projeto Firebase (este recurso é chamado de "Hospedagem". Quando você cria um projeto Firebase você obtém algum espaço de hospedagem. Você pode vincular seu domínio a esta hospedagem. Mais tarde eu explicarei isso melhorar.).
 
-Functions folder contains two important files:
+A pasta de funções contém dois arquivos importantes:
 
--index: here is where server code is. You are free to update / get better this code. Basically, there are 3 functions:
+-index: aqui é onde está o código do servidor. Você está livre para atualizar / melhorar este código. Basicamente, existem 3 funções:
 
-  * createBooking. Is a trigger launched when a reservation is created in the database. This function will notify if you configure mailing.
-  * createToken. This is a http function. It returns a token used by the webapp in order to modify a reservation
+  * createBooking. É um gatilho lançado quando uma reserva é criada no banco de dados. Esta função notificará se você configurar o envio de correio.
+  * createToken. Esta é uma função http. Ele retorna um token usado pelo webapp para modificar uma reserva
   
--serviceAccountKey.json: If you clone this repo this file shouldn't exists. It's the server side (remember, cloud function act as a server) configuration file. 
-You have to create a new service account from Firebase console. Go to Settings> Service account and generate a new private account. Put the generated file in cloud-functions/functions/serviceAccountKey.json
+-serviceAccountKey.json: Se você clonar este repo, este arquivo não deve existir. É o arquivo de configuração do lado do servidor (lembre-se, a função de nuvem atua como um servidor).
+Você precisa criar uma nova conta de serviço no Firebase console. Vá para Configurações> Conta de serviço e gere uma nova conta privada. Coloque o arquivo gerado em cloud-functions / functions / serviceAccountKey.json
 
-After setting up cloud functions, you have to configure the front end App. Vue.JS project is located on src folder. There is a file called config/firebase.js.example. Please rename this file to firebase.js and update the config variable with data provided adding a new web application in Firebase project's console. Just update config variable. 
+Depois de configurar as funções de nuvem, você deve configurar o aplicativo front end. O projeto Vue.JS está localizado na pasta src. Existe um arquivo chamado config / firebase.js.example. Renomeie este arquivo para firebase.js e atualize a variável de configuração com os dados fornecidos adicionando um novo aplicativo da web no console do projeto Firebase. Basta atualizar a variável de configuração.
 
-Schedule and app config (title, description) are defined in config folder. Constant names are self-descriptive ;)
+A programação e a configuração do aplicativo (título, descrição) são definidas na pasta config. Nomes de constantes são autodescritivos;)
 
-Admin users must be created in Firebase Console, and they have to be created using Email/Password signing method. All users created with this method will be able to this area.
+Os usuários administradores devem ser criados no Firebase console e devem ser criados usando o método de assinatura de e-mail / senha. Todos os usuários criados com este método estarão habilitados para esta área.
 
-Now you can deploy this project.
+Agora você pode implantar este projeto.
 
-## Mailing
+## Enviando
 
-You can set up automatic email sending when a client makes a reservation. 
+Você pode configurar o envio automático de e-mail quando um cliente faz uma reserva.
 
-Just rename /cloud-functions/functions/mailing.example
-to /cloud-functions/functions/mailing.js and put gmail sender credentials, and the receiver email.
-Remember to activate "Gmail less secure apps" (https://myaccount.google.com/lesssecureapps). 
-If you are using 2FA in your sender email, you would have to create an Application Specific password in order to get mailer working. This [link](https://community.nodemailer.com/using-gmail/) could be useful. 
+Basta renomear /cloud-functions/functions/mailing.example
+para /cloud-functions/functions/mailing.js e colocar as credenciais do remetente do gmail e o e-mail do destinatário.
+Lembre-se de ativar os "aplicativos menos seguros do Gmail" (https://myaccount.google.com/lesssecureapps).
+Se você estiver usando 2FA no e-mail do remetente, terá que criar uma senha específica do aplicativo para fazer o mailer funcionar. Este [link] (https://community.nodemailer.com/using-gmail/) pode ser útil.
 
-## Development
+## Desenvolvimento
 
-### With Docker
+### Com Docker
 
-Just apply the included docker-compose file and go to http://localhost:8080
+Basta aplicar o arquivo docker-compose incluído e ir para http: // localhost: 8080
 
 ```sh
 $ docker-compose up
 ```
 
-### Locally
+### Localmente
 
 Npm:
 
@@ -79,28 +78,28 @@ $ npm install
 $ npm run serve
 ```
 
-Yarn:
+Fio:
 
 ```sh
 $ yarn install
 $ yarn serve
 ```
 
-Hot-reload server will be available at  http://localhost:8080
+O servidor hot-reload estará disponível em http://localhost: 8080
 
-## Deploy app
+## Implantar aplicativo
 
-After setting up the project, you can deploy the project. 
+Depois de configurar o projeto, você pode implantar o projeto.
 
-### App
+### Aplicativo
 
-This is a vue-cli based project. Install npm packages:
+Este é um projeto baseado em vue-cli. Instale os pacotes npm:
 
 ```sh
 $ npm install
 ```
 
-Launch build command:
+Inicie o comando de compilação:
 
 ```sh
 $ npm run build --prod
@@ -108,60 +107,60 @@ $ npm run build --prod
 
 
 
-### Cloud functions and hosting
+### Funções de nuvem e hospedagem
 
-Cloud functions (triggers and http) must be published. You will need firebase-tools package. Install it:
+As funções da nuvem (triggers e http) devem ser publicadas. Você precisará do pacote firebase-tools. Instale-o:
 
 ```sh
 $ npm install -g firebase-tools
 ```
 
-Enter to cloud-function folder:
+Entre na pasta de funções da nuvem:
 
 ```sh
 $ cd cloud-functions
 ```
 
 
-Enter functions folder and install npm packages:
+Insira a pasta de funções e instale os pacotes npm:
 
 ```sh
-$ cd functions
+funções $ cd
 $ npm install
 $ cd ..
 ```
 
-The frontend app will be built at /dist folder. Please check if there is a symbolic link in cloud-functions/public pointing to /dist folder. If this link does not exist, execute:
+O aplicativo de frontend será criado na pasta / dist. Verifique se há um link simbólico em cloud-functions / public apontando para a pasta / dist. Se este link não existir, execute:
 
 ```sh
 $ ln -s ../dist public
 ```
 
 
-Login to firebase. Firebase (Google) console credential will be required:
+Faça login no firebase. A credencial do console do Firebase (Google) será necessária:
 
 ```sh
 $ firebase login
 ```
 
-Once you are logged in you can deploy functions and hosting:
+Depois de fazer login, você pode implantar funções e hospedagem:
 
 ```sh
-$ firebase deploy 
+$ firebase deploy
 ```
 
-A url will be printed in the terminal and reservation system will be accessible. You can link a custom domain in the Firebase console.
+Um url será impresso no terminal e o sistema de reservas estará acessível. Você pode vincular um domínio personalizado no console do Firebase.
 
-## ToDo
+## Pendência
 
-- Mobile app (Quasar? Ionic?)
-- Refactor stores with async/await
+- Aplicativo móvel (Quasar? Ionic?)
+- Refatorar armazenamentos com assíncrono / aguardar
 
    
-## CONTRIBUTION
+## CONTRIBUIÇÃO
 
-Comments and improvements will be appreciated.
+Comentários e melhorias serão apreciados.
 
-## LICENSE
+## LICENÇA
 
-This repo can be cloned, forked, improved without referencing. If you like it and you want me to continue developing you can give me a star this repo :)
+Este repo pode ser clonado, bifurcado, melhorado sem referência. Se você gostar e quiser que eu continue desenvolvendo, pode me dar uma estrela neste repositório :)
